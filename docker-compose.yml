@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  db:
+    container_name: timescale-db
+    image: timescale/timescaledb-ha:pg14-latest
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=portfolio
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/cash.sql:/docker-entrypoint-initdb.d/cash.sql
