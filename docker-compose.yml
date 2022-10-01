@@ -16,3 +16,5 @@ services:
     build:
       context: application
     tty: true
+    volumes:
+      - ./:/portfolio-tracker
