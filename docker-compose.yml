@@ -10,3 +10,9 @@ services:
       - "5432:5432"
     volumes:
       - ./db/cash.sql:/docker-entrypoint-initdb.d/cash.sql
+      
+  application:
+    container_name: application
+    build:
+      context: application
+    tty: true
