@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.18)
+
 project(PortfolioTrackerApp)
 
 set( SOURCE
@@ -5,3 +7,5 @@ set( SOURCE
 )
 
 add_executable(PortfolioTrackerApp ${SOURCE})
+
+target_link_libraries(PortfolioTrackerApp libpq.so)
