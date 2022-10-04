@@ -18,3 +18,8 @@ services:
     tty: true
     volumes:
       - ./:/portfolio-tracker
+  grafana:
+    container_name: grafana-portfolio
+    image: grafana/grafana-oss:latest
+    ports:
+      - "3000:3000"

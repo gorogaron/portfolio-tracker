@@ -1,0 +1,8 @@
+datasources:
+  - name: CashDB
+    url: timescale-db:5432
+    user: postgres
+    database: cash
+    timescalesb: true
+    secureJsonData:
+      password: 1234
