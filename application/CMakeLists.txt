@@ -7,5 +7,5 @@ set( SOURCE
 )
 
 add_executable(PortfolioTrackerApp ${SOURCE})
-
-target_link_libraries(PortfolioTrackerApp libpq.so)
+SET(CMAKE_CXX_FLAGS "-DCPPHTTPLIB_OPENSSL_SUPPORT")
+target_link_libraries(PortfolioTrackerApp libpq.so libcrypto.so libssl.so)

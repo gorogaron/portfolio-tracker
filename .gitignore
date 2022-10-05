@@ -33,3 +33,6 @@
 
 # Build directory
 build
+
+# API key for finnhub
+apiKey.txt
