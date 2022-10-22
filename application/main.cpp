@@ -1,8 +1,12 @@
 #include <iostream>
 #include <stdlib.h>
-
-#include "postgresql/libpq-fe.h"
+#include <postgresql/libpq-fe.h>
 #include <httplib.h>
+#include <nlohmann/json.hpp>
+
+#include "yahooScraper.h"
+
+using json = nlohmann::json;
 
 int main(){
     // Test PostgreSQL connection
@@ -18,10 +22,8 @@ int main(){
     }
     PQfinish(wCon);
 
-    //Test finnhub API
-    httplib::Client cli("https://finnhub.io");
-    std::string apiKey = "1234";
-    auto res = cli.Get("/api/v1/quote?symbol=AAPL&token=" + apiKey);
-    std::cout << res->body << std::endl;
+    //Test yahoo scraper
+    const auto& wYahooScraper = YahooScraper::getInstance();
+    auto wRes = wYahooScraper.getHistoryicalData("MSFT", "2021-12-12", "2021-12-12", YahooScraper::Interval::eInterval_1h);
 
 }
