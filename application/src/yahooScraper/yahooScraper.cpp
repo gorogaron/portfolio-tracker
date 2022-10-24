@@ -36,9 +36,11 @@ string YahooScraper::getHistoryicalData(string iTicker, string iStart, string iE
 
     json wJsonRes = json::parse(wResult);
     json wJsonPrice;
+    json wJsonTimestamp;
     wJsonPrice["close"] = wJsonRes["chart"]["result"][0]["indicators"]["quote"][0]["close"];
-    std::cout << wJsonPrice.dump() << std::endl;
+    wJsonPrice["timestamp"] = wJsonRes["chart"]["result"][0]["timestamp"];
 
+    std::cout << wJsonPrice.dump() << std::endl;
     return wResult;
 }
 

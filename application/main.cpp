@@ -5,6 +5,7 @@
 #include <nlohmann/json.hpp>
 
 #include "yahooScraper.h"
+#include 
 
 using json = nlohmann::json;
 
@@ -25,5 +26,6 @@ int main(){
     //Test yahoo scraper
     const auto& wYahooScraper = YahooScraper::getInstance();
     auto wRes = wYahooScraper.getHistoryicalData("MSFT", "2021-12-12", "2021-12-12", YahooScraper::Interval::eInterval_1h);
+
 
 }
