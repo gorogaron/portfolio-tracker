@@ -10,6 +10,7 @@ typedef std::fstream fstream;
 class InputParser{
     private:
         InputParser();
+        void logInputDataReadError(AssetType iAssetType);
     public:
         static InputParser& getInstance();
         bool open(string iPath);

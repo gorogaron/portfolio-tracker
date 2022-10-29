@@ -1,6 +1,10 @@
 #include "StockCryptoInputData.h"
 
 
-StockCryptoInputData::StockCryptoInputData(AssetType iAssetType, string iDate, Activity iActivity, string iTicker, int iQuantity, double iUnitPrice, Currency iCurrency) : 
-InputData(iAssetType, iDate), mActivity(iActivity), mTicker(iTicker), mQuantity(iQuantity), mUnitPrice(iUnitPrice), mCurrency(iCurrency){
+StockCryptoInputData::StockCryptoInputData(ActivityType iActivityType, AssetType iAssetType, string iDate, ActivityType iActivity, string iTicker, int iQuantity, double iUnitPrice, Currency iCurrency) : 
+InputData(iAssetType, iDate, iActivityType), mActivity(iActivity), mTicker(iTicker), mQuantity(iQuantity), mUnitPrice(iUnitPrice), mCurrency(iCurrency){
 };
+
+bool StockCryptoInputData::addToDatabase() const{
+
+}

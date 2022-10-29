@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <map>
 
@@ -20,22 +22,26 @@ enum class AssetType{
     Stock,
     Cash,
     Crypto,
-    StateBond,
+    Bond,
+    Funda
 };
 std::map<string, AssetType> AssetTypeStringMap = 
 {
     {"STOCK", AssetType::Stock},
     {"CASH", AssetType::Cash},
     {"CRYPTO", AssetType::Crypto},
-    {"STATEBOND", AssetType::StateBond}
+    {"BOND", AssetType::Bond},
+    {"FUNDA", AssetType::Funda}
 };
 
-enum class Activity{
+enum class ActivityType{
     Buy,
-    Sell
+    Sell,
+    Income
 };
-std::map<string, AssetType> AssetTypeStringMap = 
+std::map<string, ActivityType> ActivityTypeStringMap = 
 {
-    {"BUY", AssetType::Stock},
-    {"SELL", AssetType::Cash}
+    {"BUY", ActivityType::Buy},
+    {"SELL", ActivityType::Sell},
+    {"INCOME", ActivityType::Income}
 };

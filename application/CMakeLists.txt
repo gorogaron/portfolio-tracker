@@ -12,6 +12,7 @@ set( SOURCE
 
 include_directories(
     "./src/yahooScraper"
+    "./src/inputParser"
 )
 
 add_executable(PortfolioTrackerApp ${SOURCE})

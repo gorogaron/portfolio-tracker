@@ -2,11 +2,11 @@
 
 class StockCryptoInputData : public InputData {
     public:
-        StockCryptoInputData(AssetType iAssetType, string iDate, Activity iActivity, string iTicker,
+        StockCryptoInputData(ActivityType iActivityType, AssetType iAssetType, string iDate, ActivityType iActivity, string iTicker,
                              int iQuantity, double iUnitPrice, Currency iCurrency);
-
+        virtual bool addToDatabase() const override;
     private:
-        Activity mActivity;
+        ActivityType mActivity;
         string mTicker;
         int mQuantity;
         double mUnitPrice;

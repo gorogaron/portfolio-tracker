@@ -5,7 +5,7 @@
 #include <nlohmann/json.hpp>
 
 #include "yahooScraper.h"
-#include 
+#include "InputParser.h"
 
 using json = nlohmann::json;
 
