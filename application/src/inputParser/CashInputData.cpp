@@ -1,8 +1,8 @@
 #include "CashInputData.h"
 
 
-CashInputData::CashInputData(ActivityType iActivityType, double iAmount, Currency iCurrency, string iDate) : 
-InputData(AssetType::Cash, iDate, iActivityType), mAmount(iAmount), mCurrency(iCurrency){
+CashInputData::CashInputData(Common::ActivityType iActivityType, double iAmount, Common::Currency iCurrency, string iDate) : 
+InputData(Common::AssetType::Cash, iDate, iActivityType), mAmount(iAmount), mCurrency(iCurrency){
 };
 
 bool CashInputData::addToDatabase() const{

@@ -8,6 +8,13 @@ find_package(nlohmann_json 3.2.0 REQUIRED)
 set( SOURCE
     ./main.cpp
     ./src/yahooScraper/yahooScraper.cpp
+    ./src/inputParser/BondInputData.cpp
+    ./src/inputParser/CashInputData.cpp
+    ./src/inputParser/StockCryptoInputData.cpp
+    ./src/inputParser/FundaInputData.cpp
+    ./src/inputParser/InputParser.cpp
+    ./src/inputParser/InputData.cpp
+    ./src/utils/Common.cpp
 )
 
 include_directories(

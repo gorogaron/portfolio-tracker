@@ -1,3 +1,5 @@
+#pragma once
+
 #include "InputData.h"
 
 class FundaInputData : public InputData {

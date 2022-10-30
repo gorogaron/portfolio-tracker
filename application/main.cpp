@@ -27,5 +27,13 @@ int main(){
     const auto& wYahooScraper = YahooScraper::getInstance();
     auto wRes = wYahooScraper.getHistoryicalData("MSFT", "2021-12-12", "2021-12-12", YahooScraper::Interval::eInterval_1h);
 
+    //Test parser
+    auto& wInputParser = InputParser::getInstance();
+    wInputParser.open("/portfolio-tracker/db/user-input.txt");
+    wInputParser.parse();
+    wInputParser.close();
+    for (const auto& wInput : wInputParser.getInputs()){
+        std::cout << *wInput;
+    }
 
 }

@@ -4,7 +4,6 @@
 #include "BondInputData.h"
 #include "FundaInputData.h"
 
-#include <memory>
 #include <iostream>
 #include <algorithm>
 
@@ -28,46 +27,53 @@ bool InputParser::parse() {
 
     string wLine;
     while(getline(mFileStream, wLine)){
-        string wActivityType;
-        string wAssetType;
+        if (wLine[0] == '#'){
+            continue;
+        }
+        char wActivityTypeBuff[25];
+        char wAssetTypeBuff[25];
         std::unique_ptr<InputData> wNewInput = nullptr;
-        if (sscanf(wLine.c_str(), "%s %s", wActivityType, wAssetType) == 2){
-            switch (AssetTypeStringMap[wAssetType]) {
-                case AssetType::Stock:
-                case AssetType::Crypto:
+        if (sscanf(wLine.c_str(), "%s %s", wActivityTypeBuff, wAssetTypeBuff) == 2){
+            string wActivityType(wActivityTypeBuff);
+            string wAssetType(wAssetTypeBuff);
+            switch (Common::AssetTypeStringMap[wAssetType]) {
+                case Common::AssetType::Stock:
+                case Common::AssetType::Crypto:
                 {
-                    string wTicker, wDate, wUnitPriceCurrency;
+                    char wTicker[200], wDate[200], wUnitPriceCurrency[200];
                     double wQuantity, wUnitPrice;
-                    if (sscanf(wLine.c_str(), "%*s %*s %s %s %f %f %s", wTicker, wDate, wQuantity, wUnitPrice, wUnitPriceCurrency) == 5){
-                        wNewInput = std::unique_ptr<InputData>(new StockCryptoInputData(ActivityTypeStringMap[wActivityType], AssetTypeStringMap[wAssetType], wDate, ActivityTypeStringMap[wActivityType], wTicker,
-                                                              wQuantity, wUnitPrice, CurrencyStringMap[wUnitPriceCurrency]));
+                    if (sscanf(wLine.c_str(), "%*s %*s %s %s %f %f %s", wTicker, wDate, &wQuantity, &wUnitPrice, wUnitPriceCurrency) == 5){
+                        wNewInput = std::unique_ptr<InputData>(new StockCryptoInputData(Common::ActivityTypeStringMap[wActivityType], Common::AssetTypeStringMap[wAssetType], wDate, Common::ActivityTypeStringMap[wActivityType], wTicker,
+                                                              wQuantity, wUnitPrice, Common::CurrencyStringMap[wUnitPriceCurrency]));
                     }
                     break;
                 }
-                case AssetType::Cash:
+                case Common::AssetType::Cash:
                 {
-                    string wCurrency, wDate;
+                    char wCurrencyBuff[25];
+                    char wDate[25];
                     double wAmount;
-                    if (sscanf(wLine.c_str(), "%*s %*s %f %s %s", wAmount, wCurrency, wDate) == 3){
-                        wNewInput = std::unique_ptr<InputData>(new CashInputData(ActivityTypeStringMap[wActivityType], wAmount, CurrencyStringMap[wCurrency], wDate));
+                    if (sscanf(wLine.c_str(), "%*s %*s %f %s %s", &wAmount, wCurrencyBuff, wDate) == 3){
+                        string wCurrency(wCurrencyBuff);
+                        wNewInput = std::unique_ptr<InputData>(new CashInputData(Common::ActivityTypeStringMap[wActivityType], wAmount, Common::CurrencyStringMap[wCurrency], string(wDate)));
                     }
                     break;
                 }
-                case AssetType::Bond:
+                case Common::AssetType::Bond:
                 {
                     double wAmount, wInterest;
-                    string wDate;
-                    if (sscanf(wLine.c_str(), "%*s %*s %f %s %f", wAmount, wDate, wInterest) == 3) {
-                        wNewInput = std::unique_ptr<InputData>(new BondInputData(ActivityTypeStringMap[wActivityType], wAmount, Currency::HUF, wDate, wInterest));
+                    char wDate[25];
+                    if (sscanf(wLine.c_str(), "%*s %*s %f %s %f", &wAmount, wDate, &wInterest) == 3) {
+                        wNewInput = std::unique_ptr<InputData>(new BondInputData(Common::ActivityTypeStringMap[wActivityType], wAmount, Common::Currency::HUF, string(wDate), wInterest));
                     }
                     break;
                 }
-                case AssetType::Funda:
+                case Common::AssetType::Funda:
                 {   
                     double wAmount;
-                    string wDate;
-                    if (sscanf(wLine.c_str(), "%*s %*s %f %s", wAmount, wDate) == 2){
-                        wNewInput = std::unique_ptr<InputData>(new FundaInputData(wAmount, wDate));
+                    char wDate[25];
+                    if (sscanf(wLine.c_str(), "%*s %*s %f %s", &wAmount, wDate) == 2){
+                        wNewInput = std::unique_ptr<InputData>(new FundaInputData(wAmount, string(wDate)));
                     }
                     break;
                 }
@@ -76,7 +82,11 @@ bool InputParser::parse() {
                     break;
             }
             if (wNewInput == nullptr){
-                logInputDataReadError(AssetTypeStringMap[wAssetType]);
+                logInputDataReadError(Common::AssetTypeStringMap[wAssetType]);
+                return false;
+            }
+            else {
+                mInputVector.push_back(std::move(wNewInput));
             }
         }
     }
@@ -88,9 +98,13 @@ bool InputParser::close() {
     mFileStream.close();
 }
 
-void InputParser::logInputDataReadError(AssetType iAssetType){
-    string wAssetTypeString = std::find_if(AssetTypeStringMap.begin(), AssetTypeStringMap.end(), [iAssetType](std::pair<string, AssetType> iPair){
+void InputParser::logInputDataReadError(Common::AssetType iAssetType){
+    string wAssetTypeString = std::find_if(Common::AssetTypeStringMap.begin(), Common::AssetTypeStringMap.end(), [iAssetType](std::pair<string, Common::AssetType> iPair){
         return iAssetType == iPair.second;
     })->first;
     std::cout << "Failed to read " << wAssetTypeString << " item from input file." << std::endl;
+}
+
+const std::vector<std::unique_ptr<InputData>>& InputParser::getInputs() const {
+    return mInputVector;
 }

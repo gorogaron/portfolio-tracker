@@ -1,14 +1,16 @@
+#pragma once
+
 #include "InputData.h"
 
 class StockCryptoInputData : public InputData {
     public:
-        StockCryptoInputData(ActivityType iActivityType, AssetType iAssetType, string iDate, ActivityType iActivity, string iTicker,
-                             int iQuantity, double iUnitPrice, Currency iCurrency);
+        StockCryptoInputData(Common::ActivityType iActivityType, Common::AssetType iAssetType, string iDate, Common::ActivityType iActivity, string iTicker,
+                             int iQuantity, double iUnitPrice, Common::Currency iCurrency);
         virtual bool addToDatabase() const override;
     private:
-        ActivityType mActivity;
+        Common::ActivityType mActivity;
         string mTicker;
         int mQuantity;
         double mUnitPrice;
-        Currency mCurrency;
+        Common::Currency mCurrency;
 };
