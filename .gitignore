@@ -36,3 +36,4 @@ build
 
 #
 db/user-input.txt
+db/initial-input.sql

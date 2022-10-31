@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.18)
-
 project(PortfolioTrackerApp)
+
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 find_package(nlohmann_json 3.2.0 REQUIRED)
 
@@ -24,4 +26,4 @@ include_directories(
 
 add_executable(PortfolioTrackerApp ${SOURCE})
 SET(CMAKE_CXX_FLAGS "-DCPPHTTPLIB_OPENSSL_SUPPORT")
-target_link_libraries(PortfolioTrackerApp libpq.so libcrypto.so libssl.so libcurl.so nlohmann_json::nlohmann_json)
+target_link_libraries(PortfolioTrackerApp libpq.so libcrypto.so libssl.so libcurl.so nlohmann_json::nlohmann_json ${CONAN_LIBS})
