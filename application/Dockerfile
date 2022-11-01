@@ -9,6 +9,10 @@ RUN apt update && apt upgrade -y && \
 
 RUN curl -o /usr/local/include/httplib.h -s https://raw.githubusercontent.com/yhirose/cpp-httplib/master/httplib.h
 
+RUN git clone https://github.com/gorogaron/dotfiles.git /tmp/dotfiles && \
+    /tmp/dotfiles/setup.sh -y && \
+    rm -rf /tmp/dotfiles
+
 ENV PGHOST=timescale-db
 ENV PGPORT=5432
 ENV PGDATABASE=portfolio

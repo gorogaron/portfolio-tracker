@@ -26,7 +26,8 @@ namespace Common{
     enum class ActivityType{
         Buy,
         Sell,
-        Income
+        Income,
+        Withdraw
     };
     extern std::map<string, ActivityType> ActivityTypeStringMap;
 

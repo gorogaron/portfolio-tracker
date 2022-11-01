@@ -21,6 +21,7 @@ namespace Common{
     {
         {"BUY", ActivityType::Buy},
         {"SELL", ActivityType::Sell},
-        {"INCOME", ActivityType::Income}
+        {"INCOME", ActivityType::Income},
+        {"WITHDRAW", ActivityType::Withdraw}
     };
 }
