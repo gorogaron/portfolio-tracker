@@ -20,7 +20,7 @@ class InputParser{
         static InputParser& getInstance();
         bool open(string iPath);
         bool parse();
-        bool close();
+        void close();
 
         const std::vector<std::unique_ptr<InputData>>& getInputs() const;
 

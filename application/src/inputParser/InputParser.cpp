@@ -18,6 +18,12 @@ InputParser& InputParser::getInstance() {
 
 bool InputParser::open(string iPath) {
     mFileStream.open(iPath, std::fstream::in);
+    if (!mFileStream.is_open()) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
 bool InputParser::parse() {
@@ -94,7 +100,7 @@ bool InputParser::parse() {
     return true;
 }
 
-bool InputParser::close() {
+void InputParser::close() {
     mFileStream.close();
 }
 

@@ -12,7 +12,7 @@ using json = nlohmann::json;
 int main(){
     // Test PostgreSQL connection
     PGconn* wCon;
-    wCon = PQconnectdb("");
+    wCon = PQconnectdb("host=timescale-db port=5432 dbname=portfolio user=postgres password=1234");
     if (PQstatus(wCon) != CONNECTION_OK)
     {
         std::cout << "Connection failed!" << std::endl;
