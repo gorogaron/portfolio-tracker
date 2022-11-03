@@ -4,7 +4,7 @@ project(PortfolioTrackerApp)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-find_package(nlohmann_json 3.2.0 REQUIRED)
+find_package(nlohmann_json)
 
 
 set( SOURCE
