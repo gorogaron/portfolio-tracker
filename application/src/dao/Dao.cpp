@@ -1,13 +1,16 @@
 #include "Dao.h"
+#include <iostream>
 
-std::shared_ptr<PGconn> Dao::mDbConnection = nullptr;
+PGconn* Dao::mDbConnection = nullptr;
 
-void Dao::connect(){
-    mDbConnection = std::make_shared<PGconn>(PQconnectdb("host=timescale-db port=5432 dbname=portfolio user=postgres password=1234"));
+void Dao::connectIfNeeded(){
+    if (!isConnected()){
+        mDbConnection = PQconnectdb("host=timescale-db port=5432 dbname=portfolio user=postgres password=1234");
+    }
 }
 
-bool Dao::testConnection(){
-    if (PQstatus(mDbConnection.get()) != CONNECTION_OK) {
+bool Dao::isConnected(){
+    if (PQstatus(mDbConnection) != CONNECTION_OK) {
         return false;
     }
     else {

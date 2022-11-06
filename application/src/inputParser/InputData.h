@@ -8,6 +8,7 @@ class InputData{
     public:
         InputData(Common::AssetType iType, string iDate, Common::ActivityType iActivityType);
         virtual bool addToDatabase() const = 0;
+        Common::AssetType getType();
     private:
         Common::AssetType mType;
         Common::ActivityType mActivityType;

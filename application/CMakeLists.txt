@@ -17,11 +17,14 @@ set( SOURCE
     ./src/inputParser/InputParser.cpp
     ./src/inputParser/InputData.cpp
     ./src/utils/Common.cpp
-)
+    ./src/dao/Dao.cpp
+    ./src/dao/CashDao.cpp
+    )
 
 include_directories(
     "./src/yahooScraper"
     "./src/inputParser"
+    "./src/dao"
 )
 
 add_executable(PortfolioTrackerApp ${SOURCE})

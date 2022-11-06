@@ -5,9 +5,10 @@ USER root
 RUN apt-get update && \
     apt-get install git -y
 
-# Clone dotfiles for root and postgres users
+# Clone dotfiles
 RUN git clone https://github.com/gorogaron/dotfiles.git /tmp/dotfiles && \
-    /tmp/dotfiles/setup.sh --force
+    /tmp/dotfiles/setup.sh --force && \
+    rm -rf /tmp/dotfiles
 
 USER postgres
 RUN /tmp/dotfiles/setup.sh --force

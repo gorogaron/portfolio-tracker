@@ -1,6 +1,9 @@
 {
     "cmake.sourceDirectory": "${workspaceFolder}/application",
     "cmake.buildDirectory": "${workspaceFolder}/application/build",
+    "cmake.configureSettings": {
+		"CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/application/build/conan_toolchain.cmake"
+	},
     "cmake.configureOnOpen": true,
     "files.associations": {
         "fstream": "cpp",

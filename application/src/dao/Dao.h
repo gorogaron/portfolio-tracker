@@ -1,11 +1,18 @@
+#pragma once
+
 #include <postgresql/libpq-fe.h>
 #include <memory>
 
 class Dao{
-private:
+    public:
+
+    // PGconn is opaque, so no smart pointer can be used
+    static PGconn* mDbConnection;
+
+    private:
     Dao();
     
-    static std::shared_ptr<PGconn> mDbConnection;
-    static void connect();
-    static bool testConnection();
+    protected:
+    static void connectIfNeeded();
+    static bool isConnected();
 };

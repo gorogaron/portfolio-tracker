@@ -6,6 +6,7 @@
 
 #include "yahooScraper.h"
 #include "InputParser.h"
+#include "CashDao.h"
 
 using json = nlohmann::json;
 
@@ -34,6 +35,9 @@ int main(){
     wInputParser.close();
     for (const auto& wInput : wInputParser.getInputs()){
         std::cout << *wInput;
+        if (wInput->getType() == Common::AssetType::Cash){
+            CashDao::insertCashInputData(dynamic_cast<CashInputData&>(*wInput));
+        }
     }
 
 }
