@@ -11,4 +11,3 @@ RUN git clone https://github.com/gorogaron/dotfiles.git /tmp/dotfiles && \
     rm -rf /tmp/dotfiles
 
 USER postgres
-RUN /tmp/dotfiles/setup.sh --force

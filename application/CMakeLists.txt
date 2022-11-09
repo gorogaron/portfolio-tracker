@@ -19,6 +19,7 @@ set( SOURCE
     ./src/utils/Common.cpp
     ./src/dao/Dao.cpp
     ./src/dao/CashDao.cpp
+    ./src/dao/BondDao.cpp
     )
 
 include_directories(
