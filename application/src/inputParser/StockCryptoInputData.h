@@ -6,7 +6,6 @@ class StockCryptoInputData : public InputData {
     public:
         StockCryptoInputData(Common::ActivityType iActivityType, Common::AssetType iAssetType, string iDate, Common::ActivityType iActivity, string iTicker,
                              int iQuantity, double iUnitPrice, Common::Currency iCurrency);
-        virtual bool addToDatabase() const override;
     private:
         Common::ActivityType mActivity;
         string mTicker;

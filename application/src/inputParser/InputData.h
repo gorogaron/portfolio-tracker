@@ -7,8 +7,11 @@ class InputData{
     friend std::ostream& operator<<(std::ostream& o, const InputData& i);
     public:
         InputData(Common::AssetType iType, string iDate, Common::ActivityType iActivityType);
-        virtual bool addToDatabase() const = 0;
-        Common::AssetType getType();
+        Common::AssetType getType() const;
+        Common::ActivityType getActivityType() const;
+        string getDate() const;
+
+        virtual ~InputData() = default;
     private:
         Common::AssetType mType;
         Common::ActivityType mActivityType;

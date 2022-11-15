@@ -47,7 +47,7 @@ bool InputParser::parse() {
                 case Common::AssetType::Crypto:
                 {
                     char wTicker[200], wDate[200], wUnitPriceCurrency[200];
-                    double wQuantity, wUnitPrice;
+                    float wQuantity, wUnitPrice;
                     if (sscanf(wLine.c_str(), "%*s %*s %s %s %f %f %s", wTicker, wDate, &wQuantity, &wUnitPrice, wUnitPriceCurrency) == 5){
                         wNewInput = std::unique_ptr<InputData>(new StockCryptoInputData(Common::ActivityTypeStringMap[wActivityType], Common::AssetTypeStringMap[wAssetType], wDate, Common::ActivityTypeStringMap[wActivityType], wTicker,
                                                               wQuantity, wUnitPrice, Common::CurrencyStringMap[wUnitPriceCurrency]));
@@ -58,7 +58,7 @@ bool InputParser::parse() {
                 {
                     char wCurrencyBuff[25];
                     char wDate[25];
-                    double wAmount;
+                    float wAmount;
                     if (sscanf(wLine.c_str(), "%*s %*s %f %s %s", &wAmount, wCurrencyBuff, wDate) == 3){
                         string wCurrency(wCurrencyBuff);
                         wNewInput = std::unique_ptr<InputData>(new CashInputData(Common::ActivityTypeStringMap[wActivityType], wAmount, Common::CurrencyStringMap[wCurrency], string(wDate)));
@@ -67,7 +67,7 @@ bool InputParser::parse() {
                 }
                 case Common::AssetType::Bond:
                 {
-                    double wAmount, wInterest;
+                    float wAmount, wInterest;
                     char wDate[25];
                     if (sscanf(wLine.c_str(), "%*s %*s %f %s %f", &wAmount, wDate, &wInterest) == 3) {
                         wNewInput = std::unique_ptr<InputData>(new BondInputData(Common::ActivityTypeStringMap[wActivityType], wAmount, Common::Currency::HUF, string(wDate), wInterest));
@@ -76,7 +76,7 @@ bool InputParser::parse() {
                 }
                 case Common::AssetType::Funda:
                 {   
-                    double wAmount;
+                    float wAmount;
                     char wDate[25];
                     if (sscanf(wLine.c_str(), "%*s %*s %f %s", &wAmount, wDate) == 2){
                         wNewInput = std::unique_ptr<InputData>(new FundaInputData(wAmount, string(wDate)));

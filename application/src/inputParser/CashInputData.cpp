@@ -5,6 +5,10 @@ CashInputData::CashInputData(Common::ActivityType iActivityType, double iAmount,
 InputData(Common::AssetType::Cash, iDate, iActivityType), mAmount(iAmount), mCurrency(iCurrency){
 };
 
-bool CashInputData::addToDatabase() const{
-    
+double CashInputData::getAmount() const{
+    return mAmount;
+}
+
+Common::Currency CashInputData::getCurrency() const{
+    return mCurrency;
 }

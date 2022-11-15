@@ -2,6 +2,7 @@
 
 #include <string>
 #include <map>
+#include <algorithm>
 
 typedef std::string string;
 
@@ -30,5 +31,13 @@ namespace Common{
         Withdraw
     };
     extern std::map<string, ActivityType> ActivityTypeStringMap;
+
+    template<typename T>
+    string getStringForEnum(std::map<string, T> iMap, T iEnumVal){
+        auto wElement = find_if(iMap.begin(), iMap.end(), [iEnumVal](std::pair<string, T> iPair){
+            return iPair.second == iEnumVal;
+        });
+        return wElement->first;
+    };
 
 }

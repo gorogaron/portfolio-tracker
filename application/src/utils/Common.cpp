@@ -24,4 +24,5 @@ namespace Common{
         {"INCOME", ActivityType::Income},
         {"WITHDRAW", ActivityType::Withdraw}
     };
+
 }

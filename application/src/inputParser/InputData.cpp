@@ -6,8 +6,16 @@ InputData::InputData(Common::AssetType iType, string iDate, Common::ActivityType
     // Do nothing else
 }
 
-Common::AssetType InputData::getType(){
+Common::AssetType InputData::getType() const{
     return mType;
+}
+
+Common::ActivityType InputData::getActivityType() const{
+    return mActivityType;
+}
+
+string InputData::getDate() const{
+    return mDate;
 }
 
 std::ostream& operator<<(std::ostream& o, const InputData& i){
