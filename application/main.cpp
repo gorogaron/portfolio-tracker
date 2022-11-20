@@ -7,6 +7,8 @@
 #include "yahooScraper.h"
 #include "InputParser.h"
 #include "CashDao.h"
+#include "BondDao.h"
+#include "StockCryptoDao.h"
 
 using json = nlohmann::json;
 
@@ -35,8 +37,20 @@ int main(){
     wInputParser.close();
     for (const auto& wInput : wInputParser.getInputs()){
         std::cout << *wInput;
-        if (wInput->getType() == Common::AssetType::Cash){
-            CashDao::insertCashInputData(dynamic_cast<CashInputData&>(*wInput));
+        switch (wInput->getType()){
+            case Common::AssetType::Cash: {
+                CashDao::insertCashInputData(dynamic_cast<CashInputData&>(*wInput));
+                break;
+            }
+            case Common::AssetType::Bond: {
+                BondDao::insertBondInputData(dynamic_cast<BondInputData&>(*wInput));
+                break;
+            }
+            case Common::AssetType::Stock:
+            case Common::AssetType::Crypto: {
+                StockCryptoDao::insertStockCryptoInputData(dynamic_cast<StockCryptoInputData&>(*wInput));
+                break;
+            }
         }
     }
 

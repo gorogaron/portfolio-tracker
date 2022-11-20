@@ -2,10 +2,20 @@
 #include "fmt/format.h"
 
 bool BondDao::insertBondInputData(const BondInputData& iBondInputData){
-    string wCommand = fmt::format("INSERT INTO BOND(time, action, amount, interest, expiration) VALUES ({}, {}, {}, {}, {});",
-                                  "2022-11-2", "BUY", "3333", "22", "2022-11-15");
+    string wCommand = fmt::format("INSERT INTO BOND_input(time, action, amount, interest, expiration) VALUES ('{}', '{}', '{}', '{}', '{}');",
+                                  iBondInputData.getDate(),
+                                  Common::getStringForEnum(Common::ActivityTypeStringMap, iBondInputData.getActivityType()),
+                                  iBondInputData.getAmount(),
+                                  iBondInputData.getInterest(),
+                                  iBondInputData.getExpiration());
     Dao::connectIfNeeded();
     PGresult* wResult = PQexec(Dao::mDbConnection, wCommand.c_str());
 
-    return true;
+    if (PQresultStatus(wResult) == PGRES_COMMAND_OK){
+        return true;
+    }
+    else {
+        // Unable to execute command
+        return false;
+    }
 };

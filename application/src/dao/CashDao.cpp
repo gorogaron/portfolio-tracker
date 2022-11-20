@@ -2,7 +2,7 @@
 #include "fmt/format.h"
 
 bool CashDao::insertCashInputData(const CashInputData& iCashInputData){
-    string wCommand = fmt::format("INSERT INTO cash(time, action, amount, currency) VALUES ('{}', '{}', {}, '{}');",
+    string wCommand = fmt::format("INSERT INTO cash_input(time, action, amount, currency) VALUES ('{}', '{}', {}, '{}');",
                                    iCashInputData.getDate(),
                                    Common::getStringForEnum(Common::ActivityTypeStringMap, iCashInputData.getActivityType()),
                                    iCashInputData.getAmount(), 

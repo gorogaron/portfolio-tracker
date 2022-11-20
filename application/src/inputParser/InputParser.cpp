@@ -69,8 +69,9 @@ bool InputParser::parse() {
                 {
                     float wAmount, wInterest;
                     char wDate[25];
-                    if (sscanf(wLine.c_str(), "%*s %*s %f %s %f", &wAmount, wDate, &wInterest) == 3) {
-                        wNewInput = std::unique_ptr<InputData>(new BondInputData(Common::ActivityTypeStringMap[wActivityType], wAmount, Common::Currency::HUF, string(wDate), wInterest));
+                    char wExpirationDate[25];
+                    if (sscanf(wLine.c_str(), "%*s %*s %f %s %f %s", &wAmount, wDate, &wInterest, &wExpirationDate) == 4) {
+                        wNewInput = std::unique_ptr<InputData>(new BondInputData(Common::ActivityTypeStringMap[wActivityType], wAmount, Common::Currency::HUF, string(wDate), wInterest, string(wExpirationDate)));
                     }
                     break;
                 }

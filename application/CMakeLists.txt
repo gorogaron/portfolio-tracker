@@ -20,6 +20,7 @@ set( SOURCE
     ./src/dao/Dao.cpp
     ./src/dao/CashDao.cpp
     ./src/dao/BondDao.cpp
+    ./src/dao/StockCryptoDao.cpp
     )
 
 include_directories(
